@@ -10,21 +10,15 @@ import com.springboot.app.model.Course;
 
 @Service
 public class CourseServiceImpl implements CourseService {
+	private List<Course> courses= new ArrayList<Course>(Arrays.asList(new Course(101,"Spring Boot","Duration 3 weeks online training")
+			,new Course(102,"Microservices","Microservices course is 4 weeks class room training")
+			));
 
 	@Override
 	public Course getCourseDetails(String courseName) throws Exception {
 		try {
-			Course course=new Course();
-			if(courseName.equalsIgnoreCase("Spring boot")) {
-				course.setName("SpringBoot");
-				course.setDescription("Duration 3 weeks online training");
-				
-			}else if(courseName.equalsIgnoreCase("Microservices")) {
-				course.setName("Microservices");
-				course.setDescription("Microservices course is 4 weeks class room training");
-			}
 			
-			return course;
+			return courses.stream().filter(c->c.getName().equals(courseName)).findFirst().get();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -34,14 +28,20 @@ public class CourseServiceImpl implements CourseService {
 	public List<Course> getAllCourses() throws Exception {
 		
 		try {
-			return Arrays.asList(new Course(101,"Spring Boot","Duration 3 weeks online training")
-					,new Course(102,"Microservices","Microservices course is 4 weeks class room training")
-					);
+			return courses;
 		} catch (Exception e) {
 			throw e;
 		}
-	
-		
+	}
+
+	@Override
+	public List<Course> addCourse(Course course) throws Exception {
+		try {
+			courses.add(course);
+			return courses;
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }
