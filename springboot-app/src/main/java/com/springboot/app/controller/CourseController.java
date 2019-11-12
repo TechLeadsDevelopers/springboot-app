@@ -61,4 +61,14 @@ public class CourseController {
 		}
 		return new Course();
 	}
+	@RequestMapping(value ="/courses/{id}",method=RequestMethod.DELETE)
+	public List<Course> deleteCourseById(@PathVariable("id")long id) throws Exception{
+		try {
+			List<Course> courses = courseService.deleteCourseById(id);
+			return courses;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 return new ArrayList<Course>();
+	}
 }

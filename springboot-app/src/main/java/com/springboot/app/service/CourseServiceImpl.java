@@ -66,5 +66,14 @@ public class CourseServiceImpl implements CourseService {
 			throw e;
 		}
 	}
+	@Override
+	public List<Course> deleteCourseById(long id) throws Exception {
+		for (int i = 0; i < courses.size(); i++) {
+			if (courses.get(i).getId() == id) {
+				courses.remove(i);
+			}
+		}
+		return courses;
+	}
 
 }

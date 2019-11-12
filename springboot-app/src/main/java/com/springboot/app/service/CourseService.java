@@ -11,4 +11,5 @@ public interface CourseService {
 	public List<Course> addCourse(Course course) throws Exception;
 	public Course updateById(Course course,long id) throws Exception;
 	public Course getCourseDetails(long id) throws Exception;
+	public List<Course> deleteCourseById(long id) throws Exception;
 }
