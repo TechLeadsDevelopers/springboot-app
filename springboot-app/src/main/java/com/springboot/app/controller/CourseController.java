@@ -3,6 +3,7 @@ package com.springboot.app.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,5 +50,15 @@ public class CourseController {
 			e.printStackTrace();
 		}
 		return new ArrayList<Course>();
+	}
+	@RequestMapping(value ="/courses/{id}",method=RequestMethod.PUT)
+	public Course updateById(@RequestBody Course course,@PathVariable("id") long id) {
+		try {
+			Course courses = courseService.updateById(course,id);
+			return courses;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new Course();
 	}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import com.springboot.app.model.Course;
@@ -23,6 +24,16 @@ public class CourseServiceImpl implements CourseService {
 			throw e;
 		}
 	}
+	@Override
+	public Course getCourseDetails(long id) throws Exception {
+		try {
+			
+			return courses.stream().filter(c->c.getId()==id).findFirst().get();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
 
 	@Override
 	public List<Course> getAllCourses() throws Exception {
@@ -39,6 +50,18 @@ public class CourseServiceImpl implements CourseService {
 		try {
 			courses.add(course);
 			return courses;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	@Override
+	public Course updateById(Course course,long id) throws Exception {
+		try {
+			course.setId(id);
+			Course crse=getCourseDetails(id);
+			BeanUtils.copyProperties(course, crse);
+			return crse;
 		} catch (Exception e) {
 			throw e;
 		}
